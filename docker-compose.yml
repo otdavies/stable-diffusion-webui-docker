@@ -29,7 +29,7 @@ services:
     build: ./services/AUTOMATIC1111
     image: sd-auto:9
     environment:
-      - CLI_ARGS=--allow-code --medvram --xformers
+      - CLI_ARGS=--api --xformers
 
   auto-cpu:
     <<: *automatic
@@ -37,21 +37,3 @@ services:
     deploy: {}
     environment:
       - CLI_ARGS=--no-half --precision full
-
-  hlky:
-    <<: *base_service
-    profiles: ["hlky"]
-    build: ./services/hlky/
-    image: sd-hlky:6
-    environment:
-      - CLI_ARGS=--optimized-turbo
-      - USE_STREAMLIT=0
-
-  lstein:
-    <<: *base_service
-    profiles: ["lstein"]
-    build: ./services/lstein/
-    image: sd-lstein:4
-    environment:
-      - PRELOAD=true
-      - CLI_ARGS=
